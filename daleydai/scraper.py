@@ -1,4 +1,3 @@
-import re
 import json
 import requests
 import pandas as pd
@@ -23,19 +22,11 @@ def request_api(url):
         raise Exception("Bad Request !!")
 
 
-def get_broker_id():
-    inputId = input("Daley Dai ko ID kati?    ")
-    isInputValid = re.match(r"^[0-9]{1,2}$", inputId)
-    if isInputValid == None:
-        print("ID milena")
-        get_broker_id()
-    else:
-        fetch_broker_data(inputId)
+def fetch_broker_data(BROKER_ID, isBuy):
 
+    buyOrSell = "buyerBroker" if isBuy else "sellerBroker"
+    MAIN_URL = f"https://newweb.nepalstock.com/api/nots/nepse-data/floorsheet?&size=500&{buyOrSell}={BROKER_ID}&sort=contractId,desc"
 
-def fetch_broker_data(BROKER_ID):
-
-    MAIN_URL = f"https://newweb.nepalstock.com/api/nots/nepse-data/floorsheet?&size=500&buyerBroker={BROKER_ID}&sort=contractId,desc"
     dataFrames = pd.DataFrame()
     jsonResponse = request_api(MAIN_URL)
     summaryData = pd.json_normalize(jsonResponse["floorsheets"])
@@ -59,10 +50,3 @@ def fetch_broker_data(BROKER_ID):
 
     sortedDf = unsortedDf.sort_values("totalKittas", ascending=False)
     print(sortedDf)
-
-
-def main():
-    get_broker_id()
-
-
-main()
