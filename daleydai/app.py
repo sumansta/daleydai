@@ -1,6 +1,6 @@
 import click
 
-from daleydai.commands import buyer, seller
+from daleydai.commands import buyer, seller, show, add, remove
 
 
 @click.group()
@@ -13,3 +13,6 @@ def cli():
 
 cli.add_command(buyer)
 cli.add_command(seller)
+cli.add_command(show)
+cli.add_command(add)
+cli.add_command(remove)

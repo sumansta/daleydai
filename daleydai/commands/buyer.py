@@ -4,8 +4,8 @@ from daleydai.scraper import fetch_broker_data
 
 
 @click.command()
-@click.option("--id", default=58, help="Enter buyer broker ID")
-def buyer(id):
+@click.argument("id")
+def buyer(id: int):
     """
     Fetch bought shares by broker id
     """
