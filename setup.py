@@ -3,14 +3,14 @@ import setuptools
 with open("README.md", "r") as f:
     long_description = f.read()
 
-requirements = ["requests", "pandas", "click"]
+requirements = ["requests", "pandas", "click", "rich"]
 
 setuptools.setup(
     name="daleydai",
     version="0.0.1",
     author="Suman Shrestha",
     url="https://github.com/sumansta/daleydai",
-    description="karod bata road",
+    description="karod bata road...",
     license="MIT",
     packages=setuptools.find_packages(exclude=["dist", "build", "*.egg-info", "tests"]),
     long_description=long_description,

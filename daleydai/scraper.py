@@ -2,10 +2,7 @@ import json
 import requests
 import pandas as pd
 
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-}
+from daleydai.constants import headers, STOCK_LIST_URL, STOCKS_LIST_FILE
 
 
 pd.set_option("display.max.columns", None)
@@ -20,6 +17,14 @@ def request_api(url):
     else:
         print(response)
         raise Exception("Bad Request !!")
+
+
+def fetch_stocks_and_dump_to_file():
+    jsonResponse = request_api(STOCK_LIST_URL)
+    with open(STOCKS_LIST_FILE, "w+") as file:
+        file.truncate()
+        json.dump(jsonResponse, file)
+        pass
 
 
 def fetch_broker_data(BROKER_ID, isBuy):
