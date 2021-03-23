@@ -1,5 +1,5 @@
 """
 Exports for CLI
 """
-from daleydai.commands.buyer import buyer
-from daleydai.commands.seller import seller
+from daleydai.commands.broker import buyer, seller
+from daleydai.commands.meroshares import init, add, show, remove
