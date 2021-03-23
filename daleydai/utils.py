@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import pandas as pd
 
 from daleydai import console
 
@@ -26,14 +27,32 @@ def add_mero_shares(stock: str):
         data = file.readline()
 
         if not data:
-            value = {stock: 11}
-            json.dump(value, file)
+            listData = [stock]
+            json.dump(listData, file)
+            sys.exit()
+
+        shareList = json.loads(data)
+
+        if stock not in shareList:
+            shareList.append(stock)
+
+        file.seek(0)
+        json.dump(shareList, file)
+
+
+def remove_mero_shares(stock: str):
+    with open(CONFIG_FILE, "r+") as file:
+        data = file.readline()
+
+        if not data:
             sys.exit()
 
         data_dict = json.loads(data)
-
         if stock not in data_dict:
-            data_dict[stock] = 11
+            sys.exit()
+
+        data_dict.remove(stock)
 
         file.seek(0)
         json.dump(data_dict, file)
+        file.truncate()

@@ -7,8 +7,8 @@ import os
 from daleydai import console
 
 from daleydai.constants import CONFIG_FILE
-from daleydai.utils import create_required_files, add_mero_shares
-from daleydai.scraper import fetch_stocks_and_dump_to_file
+from daleydai.utils import create_required_files, add_mero_shares, remove_mero_shares
+from daleydai.scraper import fetch_stocks_and_dump_to_file, read_stocks_from_file
 
 
 @click.command()
@@ -36,15 +36,14 @@ def show():
             )
             sys.exit()
 
-        data_dict = json.loads(data)
-        print(data_dict)
+        read_stocks_from_file()
 
 
 @click.command()
 @click.argument("stock")
 def add(stock: str):
     """
-    Show My Shares
+    Add My Shares
     """
     add_mero_shares(stock)
 
@@ -55,18 +54,4 @@ def remove(stock: str):
     """
     Remove My Shares
     """
-    with open(CONFIG_FILE, "r+") as file:
-        data = file.readline()
-
-        if not data:
-            sys.exit()
-
-        data_dict = json.loads(data)
-        if stock not in data_dict:
-            sys.exit()
-
-        del data_dict[stock]
-
-        file.seek(0)
-        json.dump(data_dict, file)
-        file.truncate()
+    remove_mero_shares(stock)

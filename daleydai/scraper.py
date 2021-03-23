@@ -2,7 +2,7 @@ import json
 import requests
 import pandas as pd
 
-from daleydai.constants import headers, STOCK_LIST_URL, STOCKS_LIST_FILE
+from daleydai.constants import headers, TODAY_PRICE_URL, CONFIG_FILE, STOCKS_LIST_FILE
 
 
 pd.set_option("display.max.columns", None)
@@ -20,7 +20,7 @@ def request_api(url):
 
 
 def fetch_stocks_and_dump_to_file():
-    jsonResponse = request_api(STOCK_LIST_URL)
+    jsonResponse = request_api(TODAY_PRICE_URL)
     with open(STOCKS_LIST_FILE, "w+") as file:
         file.truncate()
         json.dump(jsonResponse, file)
@@ -55,3 +55,26 @@ def fetch_broker_data(BROKER_ID, isBuy):
 
     sortedDf = unsortedDf.sort_values("totalKittas", ascending=False)
     print(sortedDf)
+
+
+def read_stocks_from_file():
+    # read meroshares file
+    meroshareData = json.load(open(CONFIG_FILE))
+
+    # read stocks price file
+    data = json.load(open(STOCKS_LIST_FILE))
+    df = pd.DataFrame(data["content"])
+
+    filteredDf = df[df.symbol.isin(meroshareData)]
+    print(
+        filteredDf[
+            [
+                "symbol",
+                "openPrice",
+                "highPrice",
+                "lowPrice",
+                "closePrice",
+                "businessDate",
+            ]
+        ]
+    )
