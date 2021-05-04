@@ -39,7 +39,7 @@ def fetch_broker_data(BROKER_ID, isBuy):
     nextPage = 0
     while nextPage <= totalPages:
         print(f"Fetching page {nextPage + 1}")
-        PAGED_URL = f"https://newweb.nepalstock.com/api/nots/nepse-data/floorsheet?page={nextPage}&size=500&buyerBroker={BROKER_ID}&sort=contractId,desc"
+        PAGED_URL = f"https://newweb.nepalstock.com/api/nots/nepse-data/floorsheet?page={nextPage}&size=500&{buyOrSell}={BROKER_ID}&sort=contractId,desc"
         pagedResponse = request_api(PAGED_URL)
         pagedDf = pd.json_normalize(pagedResponse["floorsheets"]["content"])
         dataFrames = pd.concat([pagedDf, dataFrames], sort=False)

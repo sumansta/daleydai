@@ -7,7 +7,7 @@ requirements = ["requests", "pandas", "click", "rich"]
 
 setuptools.setup(
     name="daleydai",
-    version="0.0.2",
+    version="0.0.3",
     author="Suman Shrestha",
     url="https://github.com/sumansta/daleydai",
     description="karod bata road...",
