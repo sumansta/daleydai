@@ -2,6 +2,11 @@
 
 ## karod bata road...
 
+## Installing package
+```bash
+$ pip install daleydai
+```
+
 ## Commands
 
 ### Fetch latest stock price and dump it to local file. Run it once a day to get latest data.
