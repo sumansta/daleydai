@@ -1,6 +1,6 @@
 # daleydai
 
-Portfolio on CLI
+## karod bata road...
 
 ## Commands
 
