@@ -1,6 +1,11 @@
 # daleydai
 
-Portfolio on CLI
+## karod bata road...
+
+## Installing package
+```bash
+$ pip install daleydai
+```
 
 ## Commands
 
