@@ -28,7 +28,6 @@ def fetch_stocks_and_dump_to_file():
 
 
 def fetch_broker_data(BROKER_ID, isBuy):
-
     buyOrSell = "buyerBroker" if isBuy else "sellerBroker"
     MAIN_URL = f"https://newweb.nepalstock.com/api/nots/nepse-data/floorsheet?&size=500&{buyOrSell}={BROKER_ID}&sort=contractId,desc"
 
